@@ -46,6 +46,12 @@ async def create_form(request):
 	template = get_template('create-form.html')
 	return html( template.render() ) 
 
+@app.route("/<skill_id:int>/edit_form")
+async def edit_form(request, skill_id):
+	cursor.execute("SELECT * FROM SKILL WHERE SkillID = " +  str(skill_id))
+	template = get_template('edit-form.html')
+	return html( template.render(row=cursor.fetchone(), skill_id=skill_id)	  ) 
+
 @app.route("/create")
 async def create(request):
 	print(request.args)
@@ -67,6 +73,28 @@ async def create(request):
 
 	return redirect('/')
 
+@app.route("/<skill_id:int>/edit")
+async def edit(request, skill_id):
+	print(request.args)
+	skill_name = request.args.get('skill')
+	skill_description = request.args.get('description')
+	skill_type_id = request.args.get('selectbasic')
+	statement = """ 
+		UPDATE SKILL
+		SET SkillName = '%(sn)s', 
+		SkillDescription = '%(sd)s', 
+		SkillTypeID = %(sti)s
+		WHERE SkillID = %(skill_id)s;
+	""" % {
+		"sn": skill_name,
+		"sd": skill_description,
+		"sti": skill_type_id,
+		"skill_id": skill_id
+	}
+	cursor.execute(statement)
+	cnxn.commit()
+
+	return redirect('/')
 
 @app.route('/<skill_id:int>/delete')
 async def integer_handler(request, skill_id):
