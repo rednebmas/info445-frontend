@@ -2,7 +2,7 @@
 import pyodbc
 import os
 from sanic import Sanic
-from sanic.response import json, html
+from sanic.response import json, html, redirect
 from jinja2 import Environment, FileSystemLoader
 
 from aoiklivereload import LiveReloader
@@ -49,11 +49,30 @@ async def create_form(request):
 @app.route("/create")
 async def create(request):
 	print(request.args)
-	return json({'msg':'ok'})
+	skill_name = request.args.get('skill')
+	skill_description = request.args.get('description')
+	skill_type_id = request.args.get('selectbasic')
+	statement = """ 
+		INSERT INTO SKILL
+		(SkillName, SkillDescription, SkillTypeID)
+		VALUES
+		('%(sn)s', '%(sd)s', %(sti)s )
+	""" % {
+		"sn": skill_name,
+		"sd": skill_description,
+		"sti": skill_type_id
+	}
+	cursor.execute(statement)
+	cnxn.commit()
 
+	return redirect('/')
+
+
+@app.route('/<skill_id:int>/delete')
+async def integer_handler(request, skill_id):
+	cursor.execute("DELETE FROM SKILL WHERE SkillID = " + str(skill_id))
+	cnxn.commit()
+	return redirect('/')
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", port=8000)
-
-# cursor.execute("INSERT INTO INDUSTRY (IndustryName) VAlUES ('BLAH BLAH')")
-# cnxn.commit()
