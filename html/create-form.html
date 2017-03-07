@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- http://bootsnipp.com/forms -->
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<title>Create Skill</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<h1 style="text-align: center; margin-bottom: 15px;">Create Skill</h1>
+
+		<form class="form-horizontal" action="/create">
+			<fieldset>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="skill">Skill</label>  
+					<div class="col-md-6">
+						<input id="skill" name="skill" type="text" placeholder="SQL, MS Word, ..." class="form-control input-md" required="">
+
+					</div>
+				</div>
+
+				<!-- Textarea -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="description">Description</label>
+					<div class="col-md-4">                     
+						<textarea class="form-control" id="description" name="description"></textarea>
+					</div>
+				</div>
+
+				<!-- Select Basic -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="selectbasic">Skill Type</label>
+					<div class="col-md-5">
+						<select id="selectbasic" name="selectbasic" class="form-control">
+							<option value="1">Software</option>
+							<option value="2">Programming Language</option>
+							<option value="3">Foreign Language</option>
+							<option value="4">Athletic Activities</option>
+							<option value="5">Communication</option>
+
+						</select>
+
+					</div>
+				</div>
+
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary" value="Submit Button">
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="/js/editSkillType.js"></script>
+</body>
+
+</html>

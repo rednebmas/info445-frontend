@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Skills list</title>
+
+	<!-- Styles -->
+	<link href="/css/common.css" rel="stylesheet">
+
+	<!-- jQuery -->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+	<!-- Our script -->
+	<!-- <script src="main.js"></script> -->
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+</head>
+<body>
+	<div class="container">
+		<h1>Skills in Consulting DB</h1>
+
+		<div>
+			<ul>
+				{% for row in rows %}
+				<li>
+					{{ row[1] }}
+					<a href="/{{row[0]}}/edit">[edit]</a>
+					<a href="/{{row[0]}}/delete">[delete]</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<br>
+
+		<div style="text-align: center;">
+			<a href="/create_form">
+				<button type="button" class="btn btn-lg btn-success">Create a skill</button>
+			</a>
+		</div>
+
+		<br>
+
+		<p style="text-align: center;"><em>Sam Bender, Sarah Loftis, Sam Cochrane</em></p>
+	</div>
+</body>
+</html>
